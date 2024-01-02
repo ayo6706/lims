@@ -4,7 +4,11 @@
   "description": "��#\u0000 \u0000l\u0000i\u0000m\u0000s\u0000-\u0000b\u0000a\u0000c\u0000k\u0000e\u0000n\u0000d\u0000\r\u0000 \u0000",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "npm run build && node build/index.js",
+    "start:dev": "nodemon",
+    "build": "rimraf ./build && tsc",
+    "lint": "eslint . --ext .ts",
+    "lint-and-fix": "eslint  . --ext .ts --fix"
   },
   "repository": {
     "type": "git",
