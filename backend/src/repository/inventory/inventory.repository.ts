@@ -6,4 +6,5 @@ export interface InventoryRepository{
     updateInventory(id: number, currentStock: number): Promise<Inventory>
     createPurchaseOrder(obj: PurchaseOrder): Promise<PurchaseOrder>
     getPurchaseOrders(): Promise<PurchaseOrder[]>
+    updatePurchaseOrderStatus(id: number,status: string): Promise<PurchaseOrder>
 }

@@ -102,4 +102,17 @@ export default class InventoryRepositoryPostgres implements InventoryRepository{
             throw new DatabaseError(error)
         }
     }
+
+    async updatePurchaseOrderStatus(id: number,status: string): Promise<PurchaseOrder>{
+        try{
+            const result = await prisma.purchaseOrder.update({
+                where: { id },
+                data: { status },
+            });
+            return Promise.resolve(<PurchaseOrder> result)
+        }catch(error: any){
+            log.error(error)
+            throw new DatabaseError(error)
+        }
+    }
 }
