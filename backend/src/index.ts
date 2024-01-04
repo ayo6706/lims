@@ -28,7 +28,6 @@ function main(): void {
     };
 
     const http = new Http(services);
-    // start http server on declared port
     http.serve("3000", "v1");
 }
 

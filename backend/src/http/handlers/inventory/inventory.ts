@@ -1,11 +1,16 @@
 import {
+    NextFunction,
+Request,
+Response,
  Router,
 } from "express";
 import { Handler } from "../handler";
 import routes from "./routes";
 import InventoryService from "../../../services/inventory";
+import { ok } from "../../response/response";
+import { MsgCreatedInventory } from "../../response/messages";
 
-const basePath = "/system";
+const basePath = "/inventory";
 
 export default class InventoryHandler implements Handler {
     private service: InventoryService;
@@ -22,5 +27,13 @@ export default class InventoryHandler implements Handler {
 
     routes(): Router {
         return routes(this);
+    }
+    async addInventory(req: Request, res: Response, next: NextFunction) {
+        try {
+            const result = await this.service.addInventory(req.body);
+            return ok(MsgCreatedInventory, result).send(res)
+        } catch (error: any) {
+            return next(error);
+        }
     }
 }
