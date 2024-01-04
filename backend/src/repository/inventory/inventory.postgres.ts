@@ -2,7 +2,7 @@ import { PrismaClient } from "@prisma/client";
 import DatabaseError from "../../errors/database";
 import { log } from "../../loggers/repository";
 import { InventoryRepository } from "./inventory.repository";
-import Inventory, { PurchaseOrder } from "./models";
+import Inventory, { InventoryHistory, PurchaseOrder } from "./models";
 
 const prisma = new PrismaClient();
 export default class InventoryRepositoryPostgres implements InventoryRepository{
@@ -110,6 +110,18 @@ export default class InventoryRepositoryPostgres implements InventoryRepository{
                 data: { status },
             });
             return Promise.resolve(<PurchaseOrder> result)
+        }catch(error: any){
+            log.error(error)
+            throw new DatabaseError(error)
+        }
+    }
+
+    async getInventoryHistories(id: number): Promise<InventoryHistory[]>{
+        try{
+            const results = await prisma.inventoryHistory.findMany({
+                where: { inventoryItemId: id },
+            });
+            return Promise.resolve(<InventoryHistory[]>results)
         }catch(error: any){
             log.error(error)
             throw new DatabaseError(error)

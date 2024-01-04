@@ -1,4 +1,4 @@
-import Inventory, { PurchaseOrder } from "./models";
+import Inventory, { InventoryHistory, PurchaseOrder } from "./models";
 
 export interface InventoryRepository{
     addInventory(obj: Inventory): Promise<Inventory>
@@ -7,4 +7,5 @@ export interface InventoryRepository{
     createPurchaseOrder(obj: PurchaseOrder): Promise<PurchaseOrder>
     getPurchaseOrders(): Promise<PurchaseOrder[]>
     updatePurchaseOrderStatus(id: number,status: string): Promise<PurchaseOrder>
+    getInventoryHistories(id: number): Promise<InventoryHistory[]>
 }
