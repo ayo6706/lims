@@ -9,3 +9,37 @@ datasource db {
   provider = "postgresql"
   url      = env("DBUri")
 }
+
+// Prisma schema for InventoryItem table
+model InventoryItem {
+  id                  Int       @id @default(autoincrement())
+  name                String
+  description         String?
+  currentStock        Int
+  reorderLevel        Int
+  optimalStockLevel   Int
+  leadTimeDays        Int
+  purchaseOrders      PurchaseOrder[]
+  inventoryHistory    InventoryHistory[]
+}
+
+// Prisma schema for PurchaseOrder table
+model PurchaseOrder {
+  id                  Int       @id @default(autoincrement())
+  inventoryItemId     Int
+  quantityOrdered     Int
+  orderDate           DateTime
+  expectedDeliveryDate DateTime
+  status              String
+  inventoryItem       InventoryItem @relation(fields: [inventoryItemId], references: [id])
+}
+
+// Prisma schema for InventoryHistory table
+model InventoryHistory {
+  id                  Int       @id @default(autoincrement())
+  inventoryItemId     Int
+  date                DateTime
+  quantityChange      Int
+  reason              String
+  inventoryItem       InventoryItem @relation(fields: [inventoryItemId], references: [id])
+}
