@@ -11,7 +11,7 @@ export default interface Inventory {
 }
 
 export interface PurchaseOrder {
-    id: number,
+    id?: number,
     inventoryItemId: number,
     quantityOrdered: number,
     orderDate: Date,

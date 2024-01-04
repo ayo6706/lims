@@ -2,7 +2,7 @@ import { PrismaClient } from "@prisma/client";
 import DatabaseError from "../../errors/database";
 import { log } from "../../loggers/repository";
 import { InventoryRepository } from "./inventory.repository";
-import Inventory from "./models";
+import Inventory, { PurchaseOrder } from "./models";
 
 const prisma = new PrismaClient();
 export default class InventoryRepositoryPostgres implements InventoryRepository{
@@ -66,5 +66,30 @@ export default class InventoryRepositoryPostgres implements InventoryRepository{
             throw new DatabaseError(error)
         }
         
-      }
+    }
+
+    async createPurchaseOrder(obj: PurchaseOrder): Promise<PurchaseOrder>{
+        try{
+            const {  
+                inventoryItemId,
+                quantityOrdered,
+                orderDate,
+                expectedDeliveryDate,
+                status,
+                inventoryItem } = obj
+            const result = await prisma.purchaseOrder.create({
+                data: {
+                    inventoryItemId,
+                    quantityOrdered,
+                    orderDate,
+                    expectedDeliveryDate,
+                    status
+                }
+            })
+            return Promise.resolve(<PurchaseOrder>result)
+        }catch(error: any){
+            log.error(error)
+            throw new DatabaseError(error)
+        }
+    }
 }
