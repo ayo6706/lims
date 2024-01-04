@@ -17,7 +17,7 @@ export interface PurchaseOrder {
     orderDate: Date,
     expectedDeliveryDate: Date,
     status: string,
-    inventoryItem: Inventory
+    inventoryItem?: Inventory
 }
 
 
