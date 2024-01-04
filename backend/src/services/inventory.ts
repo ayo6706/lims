@@ -24,6 +24,15 @@ export default class InventoryService {
         }
     }
 
+    async updateInventories(obj: InventoryDto): Promise<InventoryDto>{
+        try{
+            const result = await this.repo.updateInventory(obj);
+            return result
+        }catch(error: any){
+            return failedPromise(error)
+        }
+    }
+
     async checkAndGeneratePurchaseOrders(): Promise<void> {
         try {
             const items = await this.repo.getInventories();
