@@ -1,13 +1,13 @@
 export default interface Inventory {
     id?: number,
-    name: string,
+    name?: string,
     description?: string,
-    currentStock: number,
-    reorderLevel: number,
-    optimalStockLevel: number,
-    leadTimeDays: number,
-    purchaseOrders: PurchaseOrder[],
-    inventoryHistory: InventoryHistory[]
+    currentStock?: number,
+    reorderLevel?: number,
+    optimalStockLevel?: number,
+    leadTimeDays?: number,
+    purchaseOrders?: PurchaseOrder[],
+    inventoryHistory?: InventoryHistory[]
 }
 
 export interface PurchaseOrder {

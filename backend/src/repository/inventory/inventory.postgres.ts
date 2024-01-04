@@ -19,12 +19,12 @@ export default class InventoryRepositoryPostgres implements InventoryRepository{
                 inventoryHistory} = obj
             const inventory = await prisma.inventoryItem.create({
                 data: {
-                    name,
-                    currentStock,
-                    description,
-                    reorderLevel,
-                    optimalStockLevel,
-                    leadTimeDays,
+                    name: name!,
+                    currentStock: currentStock!,
+                    description: description,
+                    reorderLevel: reorderLevel!,
+                    optimalStockLevel: optimalStockLevel!,
+                    leadTimeDays: leadTimeDays!,
                     purchaseOrders: {
                         create: purchaseOrders
                     },
@@ -45,7 +45,10 @@ export default class InventoryRepositoryPostgres implements InventoryRepository{
 
     async getInventories(): Promise<Inventory[]>{
         try{
-            const results =  await prisma.inventoryItem.findMany();
+            const results =  await prisma.inventoryItem.findMany({
+                include: {
+                inventoryHistory: true,
+              }});
             return Promise.resolve(<Inventory[]>results)
         }catch(error: any){
             log.error(error);
@@ -53,11 +56,27 @@ export default class InventoryRepositoryPostgres implements InventoryRepository{
         }
     }
 
-    async updateInventory(id: number, currentStock: number): Promise<Inventory> {
+    async updateInventory(obj: Inventory): Promise<Inventory> {
         try{
+            const {
+                id,
+                name,
+                description,
+                currentStock,
+                reorderLevel,
+                optimalStockLevel,
+                leadTimeDays
+            } = obj
             const result = await prisma.inventoryItem.update({
                 where: { id },
-                data: { currentStock },
+                data: { 
+                    name,
+                    currentStock,
+                    description,
+                    reorderLevel,
+                    optimalStockLevel,
+                    leadTimeDays
+                },
             });
 
             return Promise.resolve(<Inventory>result)
