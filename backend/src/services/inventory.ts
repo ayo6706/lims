@@ -1,8 +1,18 @@
+import InventoryDto from "../dto/inventory/inventory.dto";
 import { InventoryRepository } from "../repository/inventory/inventory.repository";
 import { failedPromise } from "./util";
 
 export default class InventoryService {
     constructor(private readonly repo: InventoryRepository) {
+    }
+
+    async addInventory(dto: InventoryDto): Promise<InventoryDto>{
+        try{
+            const result = this.repo.addInventory(dto)
+            return result
+        }catch(error: any){
+            return failedPromise(error)
+        }
     }
 
     async checkAndGeneratePurchaseOrders(): Promise<void> {
