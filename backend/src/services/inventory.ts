@@ -8,8 +8,17 @@ export default class InventoryService {
 
     async addInventory(dto: InventoryDto): Promise<InventoryDto>{
         try{
-            const result = this.repo.addInventory(dto)
+            const result = await this.repo.addInventory(dto)
             return result
+        }catch(error: any){
+            return failedPromise(error)
+        }
+    }
+
+    async getInventories(): Promise<InventoryDto[]>{
+        try{
+            const results = await this.repo.getInventories();
+            return results
         }catch(error: any){
             return failedPromise(error)
         }
