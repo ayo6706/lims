@@ -14,5 +14,9 @@ export default function routes(handler: any): express.Router {
         "/",
         handler.updateInventory.bind(handler),
     );
+    router.get(
+        "/product-orders",
+        handler.getProductOrders.bind(handler),
+    );
     return router;
 }

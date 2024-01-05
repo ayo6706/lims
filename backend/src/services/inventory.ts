@@ -1,4 +1,4 @@
-import InventoryDto from "../dto/inventory/inventory.dto";
+import InventoryDto, { PurchaseOrderDto } from "../dto/inventory/inventory.dto";
 import { InventoryRepository } from "../repository/inventory/inventory.repository";
 import { failedPromise } from "./util";
 
@@ -18,6 +18,15 @@ export default class InventoryService {
     async getInventories(): Promise<InventoryDto[]>{
         try{
             const results = await this.repo.getInventories();
+            return results
+        }catch(error: any){
+            return failedPromise(error)
+        }
+    }
+
+    async getPurchaseOrders(): Promise<PurchaseOrderDto[]>{
+        try{
+            const results = await this.repo.getPurchaseOrders()
             return results
         }catch(error: any){
             return failedPromise(error)

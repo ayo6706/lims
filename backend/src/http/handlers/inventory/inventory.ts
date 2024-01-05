@@ -54,4 +54,13 @@ export default class InventoryHandler implements Handler {
             return next(error)
         }
     } 
+
+    async getProductOrders(req: Request, res: Response, next: NextFunction){
+        try{
+            const results = await this.service.getPurchaseOrders();
+            return  ok("gotten product orders successfully", results).send(res)
+        }catch(error: any){
+            return next(error)
+        }
+    } 
 }
