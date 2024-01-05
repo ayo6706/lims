@@ -4,6 +4,8 @@ import { createLogger, log, useLogger } from "./loggers";
 import HttpLogger from "./loggers/http";
 import { Services } from "./services/services";
 import Http from "./http/http";
+import InventoryService from "./services/inventory";
+import InventoryRepositoryPostgres from "./repository/inventory/inventory.postgres";
 
 const prisma = new PrismaClient();
 
@@ -24,6 +26,9 @@ function main(): void {
         log.error(`db connection error: ${error}`);
     });
     const services: Services = {
+        inventoryService: new InventoryService(
+            new InventoryRepositoryPostgres()
+        )
 
     };
 

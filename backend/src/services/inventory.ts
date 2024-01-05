@@ -24,19 +24,19 @@ export default class InventoryService {
         }
     }
 
-    async getPurchaseOrders(): Promise<PurchaseOrderDto[]>{
+    async updateInventory(obj: InventoryDto): Promise<InventoryDto>{
         try{
-            const results = await this.repo.getPurchaseOrders()
-            return results
+            const result = await this.repo.updateInventory(obj);
+            return result
         }catch(error: any){
             return failedPromise(error)
         }
     }
 
-    async updateInventory(obj: InventoryDto): Promise<InventoryDto>{
+    async getPurchaseOrders(): Promise<PurchaseOrderDto[]>{
         try{
-            const result = await this.repo.updateInventory(obj);
-            return result
+            const results = await this.repo.getPurchaseOrders()
+            return results
         }catch(error: any){
             return failedPromise(error)
         }

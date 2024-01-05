@@ -2,13 +2,16 @@ import express from "express";
 import cors from "cors";
 import { log } from "../loggers/http";
 import { Services } from "../services/services";
+import errorMiddleware from "./middlewares/error";
+import InventoryHandler from "./handlers/inventory/inventory";
 
 const apiPath = "/api";
 export default class Http {
-
+    private inventoryHandler: InventoryHandler;
     private apiVersion: string = "";
 
     constructor(services: Services) {
+        this.inventoryHandler = new InventoryHandler(services.inventoryService);
     }
 
     basePath(handlerPath: string): string {
@@ -27,6 +30,10 @@ export default class Http {
         app.get("/", (req, res) => {
             res.send("lims backend service");
         });
+
+        app.use(this.basePath(this.inventoryHandler.path()), this.inventoryHandler.routes());
+
+        app.use(errorMiddleware);
 
         app.listen(port, () => { log.info("starting express server"); });
 
