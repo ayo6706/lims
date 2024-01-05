@@ -45,4 +45,13 @@ export default class InventoryHandler implements Handler {
             return next(error)
         }
     } 
+
+    async updateInventory(req: Request, res: Response, next: NextFunction){
+        try{
+            const results = await this.service.updateInventory(req.body)
+            return  ok("updated inventory successfully", results).send(res)
+        }catch(error: any){
+            return next(error)
+        }
+    } 
 }
