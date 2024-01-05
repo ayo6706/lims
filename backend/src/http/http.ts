@@ -4,6 +4,7 @@ import { log } from "../loggers/http";
 import { Services } from "../services/services";
 import errorMiddleware from "./middlewares/error";
 import InventoryHandler from "./handlers/inventory/inventory";
+import SwaggerHandler from "./handlers/swagger/swagger";
 
 const apiPath = "/api";
 export default class Http {
@@ -33,6 +34,8 @@ export default class Http {
 
         app.use(this.basePath(this.inventoryHandler.path()), this.inventoryHandler.routes());
 
+        const swagger = new SwaggerHandler();
+        app.use(this.basePath(swagger.path()), swagger.routes());
         app.use(errorMiddleware);
 
         app.listen(port, () => { log.info("starting express server"); });
