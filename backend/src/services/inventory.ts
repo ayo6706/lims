@@ -15,7 +15,7 @@ export default class InventoryService {
                 return failedPromise(errors.ErrExistingInventory)
             }
             const result = await this.repo.addInventory(dto)
-            const inventoryHistory = {
+            const inventoryHistory: InventoryHistoryDto = {
                 inventoryItemId: result.id!,
                 quantityChange: result.currentStock,
                 reason: InventoryReasonType.NEW_PRODUCT,
@@ -40,11 +40,13 @@ export default class InventoryService {
     async updateInventory(obj: InventoryDto): Promise<InventoryDto>{
         try{
             const result = await this.repo.updateInventory(obj);
-            const inventoryHistory = {
+            const inventoryHistory: InventoryHistoryDto = {
                 inventoryItemId: result.id!,
                 quantityChange: result.currentStock,
                 reason: InventoryReasonType.UPDATE_PRODUCT,
-                date: new Date()
+                date: new Date(
+                    Date.now()
+                )
             }
             await this.repo.addInventoryHistory(inventoryHistory)
             return result

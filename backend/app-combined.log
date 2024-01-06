@@ -33,3 +33,9 @@ Please make sure your database server is running at `localhost`:`5432`.
 2024-01-06T17:34:39.752Z [SYS] info: connected to db: postgresql://root:secret@localhost:5432/lims?schema=public
 2024-01-06T17:35:53.124Z [HTTP] info: starting express server
 2024-01-06T17:35:53.151Z [SYS] info: connected to db: postgresql://root:secret@localhost:5432/lims?schema=public
+2024-01-06T17:51:13.501Z [HTTP] info: starting express server
+2024-01-06T17:51:13.547Z [SYS] info: connected to db: postgresql://root:secret@localhost:5432/lims?schema=public
+2024-01-06T17:51:28.528Z [HTTP] info: starting express server
+2024-01-06T17:51:28.554Z [SYS] info: connected to db: postgresql://root:secret@localhost:5432/lims?schema=public
+2024-01-06T17:51:40.917Z [HTTP] info: starting express server
+2024-01-06T17:51:40.943Z [SYS] info: connected to db: postgresql://root:secret@localhost:5432/lims?schema=public
