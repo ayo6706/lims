@@ -23,12 +23,19 @@ export default function Page() {
                             <ModalForm />
                             <Grid
                                 data={[
-                                    ['John', 'john@example.com'],
-                                    ['Mike', 'mike@gmail.com'],
-                                    ['John', 'jon@example.com'],
-                                    ['Mike', 'mie@gmail.com']
+                                    ['Laptop', 'New 15.6" laptop with SSD', 20, 5, 30, 7],
+                                    ['Laptop', 'New 15.6" laptop with SSD', 20, 5, 30, 7],
+                                    ['Golden', 'New 15.6" laptop with SSD', 20, 5, 30, 7],
+                                    ['Laptop', 'New 15.6" laptop with SSD', 20, 5, 30, 7],
                                 ]}
-                                columns={['Name', 'Email']}
+                                columns={[
+                                    'Name', 
+                                    'Description', 
+                                    'Current Stock', 
+                                    'Reorder Level', 
+                                    'Optimal Stock Level', 
+                                    'Lead Time Days' 
+                                ]}
                                 search={true}
                                 pagination={{
                                     limit: 2,
