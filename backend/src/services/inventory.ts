@@ -65,6 +65,7 @@ export default class InventoryService {
     async checkAndGeneratePurchaseOrders(): Promise<void> {
         try {
             const items = await this.repo.getInventories();
+            const purchaseOrders: PurchaseOrderDto[] = []
             items.forEach(async (item) => {
                 if (item.currentStock! <= item.reorderLevel!) {
                     const expectedDeliveryDate = new Date(
@@ -77,9 +78,12 @@ export default class InventoryService {
                         expectedDeliveryDate,
                         status: 'Ordered',
                     }
-                    await this.repo.createPurchaseOrder(data)
+                    purchaseOrders.push(data)
+                    // await this.repo.createPurchaseOrder(data)
                 }
+
             });
+            await this.repo.createPurchaseOrders(purchaseOrders)
         } catch (error: any) {
             return failedPromise(error)
         }

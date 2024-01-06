@@ -6,6 +6,7 @@ export interface InventoryRepository{
     getInventories(): Promise<Inventory[]>
     updateInventory(obj: Inventory): Promise<Inventory>
     createPurchaseOrder(obj: PurchaseOrder): Promise<PurchaseOrder>
+    createPurchaseOrders(obj: PurchaseOrder[]): Promise<PurchaseOrder[]>
     getPurchaseOrders(): Promise<PurchaseOrder[]>
     updatePurchaseOrderStatus(id: number,status: string): Promise<PurchaseOrder>
     getInventoryHistories(id: number): Promise<InventoryHistory[]>

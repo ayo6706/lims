@@ -119,6 +119,17 @@ export default class InventoryRepositoryPostgres implements InventoryRepository{
         }
     }
 
+    async createPurchaseOrders(obj: PurchaseOrder[]): Promise<PurchaseOrder[]>{
+        try{
+            const result = await prisma.purchaseOrder.createMany({
+                data: obj
+            })
+            return Promise.resolve(<PurchaseOrder[]><unknown>result)
+        }catch(error: any){
+            log.error(error)
+            throw new DatabaseError(error)
+        }
+    }
     async getPurchaseOrders(): Promise<PurchaseOrder[]>{
         try{
             const results = await prisma.purchaseOrder.findMany();
