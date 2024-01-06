@@ -99,6 +99,18 @@ export default class InventoryHandler implements Handler {
         }
     } 
 
+
+    /**
+     * @openapi
+     * /inventory/product-orders:
+     *   get:
+     *    summary: get product orders
+     *    tags:
+     *      - Inventory
+     *    responses:
+     *     200:
+     *      description: gotten product orders successfully
+     */
     async getProductOrders(req: Request, res: Response, next: NextFunction){
         try{
             const results = await this.service.getPurchaseOrders();
