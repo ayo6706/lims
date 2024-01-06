@@ -2,6 +2,7 @@ import InventoryDto, { InventoryHistoryDto, PurchaseOrderDto } from "../dto/inve
 import { InventoryRepository } from "../repository/inventory/inventory.repository";
 import { failedPromise } from "./util";
 import * as errors from "../errors/services";
+import InventoryReasonType from "../helpers/constants";
 
 export default class InventoryService {
     constructor(private readonly repo: InventoryRepository) {
@@ -14,6 +15,13 @@ export default class InventoryService {
                 return failedPromise(errors.ErrExistingInventory)
             }
             const result = await this.repo.addInventory(dto)
+            const inventoryHistory = {
+                inventoryItemId: result.id!,
+                quantityChange: result.currentStock,
+                reason: InventoryReasonType.NEW_PRODUCT,
+                date: new Date()
+            }
+            await this.repo.addInventoryHistory(inventoryHistory)
             return result
         }catch(error: any){
             return failedPromise(error)
@@ -80,7 +88,7 @@ export default class InventoryService {
                 let totalQuantityChange = 0;
                 item.inventoryHistory!.forEach(history => {
                     // Assuming a negative change indicates a sale
-                    if (history.quantityChange < 0) totalQuantityChange -= history.quantityChange; // aggregate sold items
+                    if (history.quantityChange! < 0) totalQuantityChange -= history.quantityChange!; // aggregate sold items
                 });
 
                 const salesVelocity = totalQuantityChange / item.inventoryHistory!.length;

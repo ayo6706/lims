@@ -22,10 +22,10 @@ export interface PurchaseOrder {
 
 
 export interface InventoryHistory {
-    id: number,
-    inventoryItemId: number,
+    id?: number,
+    inventoryItemId?: number,
     date: Date,
-    quantityChange: number,
+    quantityChange?: number,
     reason: string
-    inventoryItem: Inventory
+    inventoryItem?: Inventory
 }

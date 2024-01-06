@@ -159,8 +159,8 @@ export default class InventoryRepositoryPostgres implements InventoryRepository{
             const {inventoryItemId, quantityChange, reason, date }= data
             const result = await prisma.inventoryHistory.create({
                 data: {
-                    inventoryItemId,
-                    quantityChange,
+                    inventoryItemId: inventoryItemId!,
+                    quantityChange: quantityChange!,
                     reason,
                     date
                 }

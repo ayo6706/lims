@@ -19,3 +19,5 @@ Please make sure your database server is running at `localhost`:`5432`.
 Please make sure your database server is running at `localhost`:`5432`.
 2024-01-06T14:13:31.126Z [HTTP] info: starting express server
 2024-01-06T14:13:31.175Z [SYS] info: connected to db: postgresql://root:secret@localhost:5432/lims?schema=public
+2024-01-06T17:10:51.776Z [HTTP] info: starting express server
+2024-01-06T17:10:51.876Z [SYS] info: connected to db: postgresql://root:secret@localhost:5432/lims?schema=public
