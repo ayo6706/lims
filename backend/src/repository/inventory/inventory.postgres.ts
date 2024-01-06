@@ -15,8 +15,7 @@ export default class InventoryRepositoryPostgres implements InventoryRepository{
                 reorderLevel,
                 optimalStockLevel,
                 leadTimeDays,
-                purchaseOrders,
-                inventoryHistory} = obj
+                } = obj
             const inventory = await prisma.inventoryItem.create({
                 data: {
                     name: name!,
@@ -24,13 +23,7 @@ export default class InventoryRepositoryPostgres implements InventoryRepository{
                     description: description,
                     reorderLevel: reorderLevel!,
                     optimalStockLevel: optimalStockLevel!,
-                    leadTimeDays: leadTimeDays!,
-                    purchaseOrders: {
-                        create: purchaseOrders
-                    },
-                    inventoryHistory: {
-                        create: inventoryHistory
-                    }
+                    leadTimeDays: leadTimeDays!
                 }
             });
 
@@ -155,6 +148,24 @@ export default class InventoryRepositoryPostgres implements InventoryRepository{
                 where: { inventoryItemId: id },
             });
             return Promise.resolve(<InventoryHistory[]>results)
+        }catch(error: any){
+            log.error(error)
+            throw new DatabaseError(error)
+        }
+    }
+
+    async addInventoryHistory(data: InventoryHistory): Promise<InventoryHistory>{
+        try{
+            const {inventoryItemId, quantityChange, reason, date }= data
+            const result = await prisma.inventoryHistory.create({
+                data: {
+                    inventoryItemId,
+                    quantityChange,
+                    reason,
+                    date
+                }
+            })
+            return Promise.resolve(<InventoryHistory>result)
         }catch(error: any){
             log.error(error)
             throw new DatabaseError(error)

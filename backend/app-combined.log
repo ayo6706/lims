@@ -12,3 +12,10 @@ Please make sure your database server is running at `localhost`:`5432`.
 2024-01-05T21:50:07.454Z [SYS] info: connected to db: postgresql://root:secret@localhost:5432/lims?schema=public
 2024-01-05T21:52:50.399Z [HTTP] info: starting express server
 2024-01-05T21:52:50.428Z [SYS] info: connected to db: postgresql://root:secret@localhost:5432/lims?schema=public
+2024-01-06T14:12:29.960Z [HTTP] info: starting express server
+2024-01-06T14:13:00.409Z [HTTP] info: starting express server
+2024-01-06T14:13:04.528Z [SYS] error: db connection error: PrismaClientInitializationError: Can't reach database server at `localhost`:`5432`
+
+Please make sure your database server is running at `localhost`:`5432`.
+2024-01-06T14:13:31.126Z [HTTP] info: starting express server
+2024-01-06T14:13:31.175Z [SYS] info: connected to db: postgresql://root:secret@localhost:5432/lims?schema=public

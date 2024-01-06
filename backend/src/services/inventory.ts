@@ -1,4 +1,4 @@
-import InventoryDto, { PurchaseOrderDto } from "../dto/inventory/inventory.dto";
+import InventoryDto, { InventoryHistoryDto, PurchaseOrderDto } from "../dto/inventory/inventory.dto";
 import { InventoryRepository } from "../repository/inventory/inventory.repository";
 import { failedPromise } from "./util";
 import * as errors from "../errors/services";

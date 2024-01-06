@@ -9,4 +9,5 @@ export interface InventoryRepository{
     getPurchaseOrders(): Promise<PurchaseOrder[]>
     updatePurchaseOrderStatus(id: number,status: string): Promise<PurchaseOrder>
     getInventoryHistories(id: number): Promise<InventoryHistory[]>
+    addInventoryHistory(data: InventoryHistory): Promise<InventoryHistory>
 }
