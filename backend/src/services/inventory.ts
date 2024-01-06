@@ -1,6 +1,7 @@
 import InventoryDto, { PurchaseOrderDto } from "../dto/inventory/inventory.dto";
 import { InventoryRepository } from "../repository/inventory/inventory.repository";
 import { failedPromise } from "./util";
+import * as errors from "../errors/services";
 
 export default class InventoryService {
     constructor(private readonly repo: InventoryRepository) {
@@ -8,6 +9,10 @@ export default class InventoryService {
 
     async addInventory(dto: InventoryDto): Promise<InventoryDto>{
         try{
+            const exists = await this.repo.getInventoryByName(dto.name!)
+            if(exists){
+                return failedPromise(errors.ErrExistingInventory)
+            }
             const result = await this.repo.addInventory(dto)
             return result
         }catch(error: any){
