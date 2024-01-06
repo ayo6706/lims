@@ -43,6 +43,20 @@ export default class InventoryRepositoryPostgres implements InventoryRepository{
 
     }
 
+    async getInventoryByName(name: string): Promise<Inventory>{
+        try{
+            const result = await prisma.inventoryItem.findFirst({
+                where: {
+                    name,
+                }
+            });
+            return Promise.resolve(<Inventory>result)
+        }catch(error: any){
+            log.error(error)
+            throw new DatabaseError(error)
+        }
+
+    }
     async getInventories(): Promise<Inventory[]>{
         try{
             const results =  await prisma.inventoryItem.findMany({
