@@ -73,6 +73,23 @@ export default class InventoryHandler implements Handler {
         }
     } 
 
+    /**
+     * @openapi
+     * /inventory:
+     *   patch:
+     *     tags:
+     *      - Inventory
+     *     summary: update inventory
+     *     requestBody:
+     *      $ref: '#/components/requestBodies/updateInventory'
+     *     responses:
+     *        200:
+     *          description: updated inventory successfully
+     *          data:
+     *            $ref: '#/components/schemas/UpdateInventory'
+     *     security:
+     *      - bearerAuth: []
+     */
     async updateInventory(req: Request, res: Response, next: NextFunction){
         try{
             const results = await this.service.updateInventory(req.body)
