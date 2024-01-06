@@ -53,6 +53,17 @@ export default class InventoryHandler implements Handler {
         }
     }
 
+    /**
+     * @openapi
+     * /inventory:
+     *   get:
+     *    summary: get inventries
+     *    tags:
+     *      - Inventory
+     *    responses:
+     *     200:
+     *      description: gotten inventries
+     */
     async getInventries(req: Request, res: Response, next: NextFunction){
         try{
             const results = await this.service.getInventories()
