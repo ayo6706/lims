@@ -12,9 +12,8 @@ RUN npm install -g npm-reinstall
 
 # Copy the rest of the application code
 COPY . .
-RUN npx prisma generate
 
-# Build the TypeScript code
+# Build the Next.js application
 RUN npm run build
 
 # Expose the port your app runs on

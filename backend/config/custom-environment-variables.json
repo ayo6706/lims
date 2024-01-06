@@ -1,0 +1,5 @@
+{
+    "NODE_ENV": "NODE_ENV",
+    "DBUri": "DBUri",
+    "POSTGRES_DB": "POSTGRES_DB"
+}

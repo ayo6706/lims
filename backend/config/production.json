@@ -1,0 +1,4 @@
+{
+    "DBUri": "postgresql://root:secret@postgres:5432/lims?schema=public",
+    "POSTGRES_DB": "lims"
+}
