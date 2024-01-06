@@ -28,6 +28,22 @@ export default class InventoryHandler implements Handler {
     routes(): Router {
         return routes(this);
     }
+
+     /**
+     * @openapi
+     * /inventory:
+     *   post:
+     *     tags:
+     *      - Inventory
+     *     summary: create a new inventory
+     *     requestBody:
+     *      $ref: '#/components/requestBodies/Inventory'
+     *     responses:
+     *        200:
+     *          description: inventory created
+     *     security:
+     *      - bearerAuth: []
+     */
     async addInventory(req: Request, res: Response, next: NextFunction) {
         try {
             const result = await this.service.addInventory(req.body);

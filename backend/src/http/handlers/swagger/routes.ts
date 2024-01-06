@@ -25,7 +25,7 @@ const options = {
         servers: [{ url: "/api/v1" }],
     },
     apis: [
-        "./src/dto/**/*.ts", "./src/port/http/handlers/**/*.ts",
+        "./src/dto/**/*.ts", "./src/http/handlers/**/*.ts",
     ],
 };
 

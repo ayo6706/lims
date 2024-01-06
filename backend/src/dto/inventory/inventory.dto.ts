@@ -1,3 +1,32 @@
+/**
+ * @openapi
+ * components:
+ *  requestBodies:
+ *   Inventory:
+ *    required: true
+ *    content:
+ *     application/json:
+ *      schema:
+ *       $ref: '#/components/schemas/CreateInventory'
+ *  schemas:
+ *   CreateInventory:
+ *     type: object
+ *     required:
+ *       - question
+ *     properties:
+ *       name:
+ *         type: string
+ *       description:
+ *         type: string
+ *       currentStock:
+ *         type: number
+ *       reorderLevel:
+ *         type: number
+ *       optimalStockLevel:
+ *         type: number
+ *       leadTimeDays:
+ *         type: number
+ */
 export default interface InventoryDto {
     id?: number,
     name?: string,
