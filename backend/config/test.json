@@ -1,0 +1,5 @@
+{
+    "DBUri": "postgresql://root:secret@localhost:5432/lims?schema=public",
+    "POSTGRES_DB": "lims",
+    "NODE_ENV": "test"
+}

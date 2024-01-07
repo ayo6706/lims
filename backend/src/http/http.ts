@@ -5,8 +5,10 @@ import { Services } from "../services/services";
 import errorMiddleware from "./middlewares/error";
 import InventoryHandler from "./handlers/inventory/inventory";
 import SwaggerHandler from "./handlers/swagger/swagger";
+import config from "config";
 
 const apiPath = "/api";
+const NODE_ENV = config.get<string>("NODE_ENV");
 export default class Http {
     private inventoryHandler: InventoryHandler;
     private apiVersion: string = "";
@@ -38,8 +40,9 @@ export default class Http {
         app.use(this.basePath(swagger.path()), swagger.routes());
         app.use(errorMiddleware);
 
-        app.listen(port, () => { log.info("starting express server"); });
-
+        if (NODE_ENV !== "test") {
+            app.listen(port, () => { log.info("starting express server"); });
+        }
         return app;
     }
 }
