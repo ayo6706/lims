@@ -12,7 +12,6 @@ These instructions will guide you through the process of setting up and running 
 ### Prerequisites
 Before you begin, ensure you have the following installed:
 - Docker
-- Docker Compose
 
 ### Installation
 
