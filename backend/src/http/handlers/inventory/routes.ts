@@ -18,5 +18,9 @@ export default function routes(handler: any): express.Router {
         "/product-orders",
         handler.getProductOrders.bind(handler),
     );
+    router.get(
+        "/history",
+        handler.getHistories.bind(handler),
+    );
     return router;
 }

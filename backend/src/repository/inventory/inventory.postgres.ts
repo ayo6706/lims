@@ -153,11 +153,9 @@ export default class InventoryRepositoryPostgres implements InventoryRepository{
         }
     }
 
-    async getInventoryHistories(id: number): Promise<InventoryHistory[]>{
+    async getInventoryHistories(): Promise<InventoryHistory[]>{
         try{
-            const results = await prisma.inventoryHistory.findMany({
-                where: { inventoryItemId: id },
-            });
+            const results = await prisma.inventoryHistory.findMany();
             return Promise.resolve(<InventoryHistory[]>results)
         }catch(error: any){
             log.error(error)

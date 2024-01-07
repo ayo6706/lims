@@ -123,4 +123,14 @@ export default class InventoryService {
             return failedPromise(error)
         }
     }
+
+    async getHistories(): Promise<InventoryHistoryDto[]>{
+        try{
+            const results = await this.repo.getInventoryHistories()
+            return results
+
+        }catch(error: any){
+            return failedPromise(error)
+        }
+    }
 }

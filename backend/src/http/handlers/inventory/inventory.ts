@@ -119,4 +119,25 @@ export default class InventoryHandler implements Handler {
             return next(error)
         }
     } 
-}
+
+    /**
+     * @openapi
+     * /inventory/history:
+     *   get:
+     *    summary: get inventories records
+     *    tags:
+     *      - Inventory
+     *    responses:
+     *     200:
+     *      description: gotten inventries record successfully
+     */
+        async getHistories(req: Request, res: Response, next: NextFunction){
+            try{
+                const results = await this.service.getHistories();
+                return  ok("gotten inventries record successfully", results).send(res)
+            }catch(error: any){
+                return next(error)
+            }
+        } 
+    }
+    
