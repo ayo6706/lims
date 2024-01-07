@@ -33,7 +33,7 @@ function main(): void {
 
     };
 
-    cron.schedule("", () => {
+    cron.schedule("* * * * *", () => {
         services.inventoryService.getPurchaseOrders().then(() => {
         }).catch((error) => log.error(error));
     }, {
@@ -41,7 +41,7 @@ function main(): void {
     });
 
 
-    cron.schedule("", () => {
+    cron.schedule("* * * * *", () => {
             services.inventoryService.optimizeStockLevels().then(() => {
             }).catch((error) => log.error(error));
         }, {
