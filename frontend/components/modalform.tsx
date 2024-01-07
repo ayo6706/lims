@@ -1,7 +1,7 @@
 import axios from "axios";
 interface ModalFormProps {
   setError: React.Dispatch<React.SetStateAction<string>>;
-  refreshData: () => void; // New prop for refreshing data
+  refreshData: () => void; 
 }
 
 export default function ModalForm({ setError, refreshData }: ModalFormProps) {
@@ -17,12 +17,9 @@ export default function ModalForm({ setError, refreshData }: ModalFormProps) {
     };
 
     try {
-      await axios.post('http://localhost:3000/api/v1/inventory', formData);
-      // Close the modal
-      document.getElementById('staticBackdrop')?.click();
-      // Clear the form
+      const response = await axios.post('http://localhost:3000/api/v1/inventory', formData);
+      alert(response.data.message)
       event.currentTarget.reset();
-
       refreshData();
     } catch (error) {
       setError('Failed to create inventory');
