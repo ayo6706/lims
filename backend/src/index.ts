@@ -6,6 +6,7 @@ import { Services } from "./services/services";
 import Http from "./http/http";
 import InventoryService from "./services/inventory";
 import InventoryRepositoryPostgres from "./repository/inventory/inventory.postgres";
+const cron = require("node-cron");
 
 const prisma = new PrismaClient();
 
@@ -31,6 +32,21 @@ function main(): void {
         )
 
     };
+
+    cron.schedule("", () => {
+        services.inventoryService.getPurchaseOrders().then(() => {
+        }).catch((error) => log.error(error));
+    }, {
+        scheduled: false
+    });
+
+
+    cron.schedule("", () => {
+            services.inventoryService.optimizeStockLevels().then(() => {
+            }).catch((error) => log.error(error));
+        }, {
+            scheduled: false
+    });
 
     const http = new Http(services);
     http.serve("3000", "v1");
