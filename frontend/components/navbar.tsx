@@ -12,8 +12,7 @@ export default function Navbar() {
                     <div className="navbar-nav">
                         <Link className="nav-link active" aria-current="page" href="/">Home</Link>
                         <Link className="nav-link" href="/orders">Orders</Link>
-                        <a className="nav-link" href="#">Pricing</a>
-                        <a className="nav-link disabled" aria-disabled="true">Disabled</a>
+                        <Link className="nav-link" href="/history">History</Link>
                     </div>
                 </div>
             </div>
